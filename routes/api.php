@@ -24,23 +24,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/cuaca', [BMKGController::class, 'index']);
 
-// Route::group(['prefix' => 'v1'], function(){
-//     Route::get('/device/{id}/data/{data}', [DataSensorController::class, 'get_data']);
-// });
+Route::post('/data', [DataSensorController::class, 'get_data']);
+// Route::post('/data', function(Request $request){
+//     try {
+//         Sensor::create([
+//             'device_id' => $request->device_id,
+//             'temperature' => $request->temperature,
+//             'humidity' => $request->humidity,
+//         ]);
 
-Route::post('/data', function(Request $request){
-    try {
-        Sensor::create([
-            'device_id' => $request->device_id,
-            'data' => $request->data
-        ]);
-    } catch (\Throwable $th) {
-        Sensor::create([
-            'device_id' => $request->device_id,
-            'data' => '0'
-        ]);
-    }
-    return $request;
-});
+//         return response()->json([
+//             'message' => 'pengiriman berhasil',
+//         ]);
+//     } catch (\Throwable $th) {
+//         return response()->json([
+//             'message' => 'pengiriman gagal',
+//         ]);
+//     }
+// });
 
 Route::get('/data', [SensorApiController::class, 'data_sensor'])->name('data_sensor');

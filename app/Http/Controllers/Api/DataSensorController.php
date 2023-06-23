@@ -11,17 +11,10 @@ use Illuminate\Database\QueryException;
 
 class DataSensorController extends Controller
 {
-    public function get_data(Request $request, $id, $data, $api_key){
+    public function get_data(Request $request){
         try{
-            if($api_key != env('API_KEY')){
-                return response()->json([
-                    'message' => 'API KEY is invalid!',
-                    'status' => false
-                    ]
-                );
-            }
 
-            $device = Device::where('id', $id)->get()[0];
+            $device = Device::where('id', $request->device_id)->get()[0];
 
             if($device->status != 'active'){
                 return response()->json([
@@ -31,8 +24,9 @@ class DataSensorController extends Controller
             }
 
             $data = [
-                'device_id' => $id,
-                'data' => $data
+                'device_id' => $request->device_id,
+                'temperature' => $request->temperature,
+                'humidity' => $request->humidity,
             ];
 
             $sensor_data = Sensor::create($data);

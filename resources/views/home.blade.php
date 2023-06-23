@@ -1,98 +1,50 @@
 @extends('layout.layout')
 @section('container')
 
-<style>
-    .pop-out {
-        animation: popOut 0.5s;
-    }
-
-    @keyframes popOut {
-        0% {
-            transform: scale(0);
-            opacity: 0;
-        }
-
-        20% {
-            transform: scale(1.2);
-        }
-
-        40% {
-            transform: scale(0.9);
-        }
-
-        60% {
-            transform: scale(1.1);
-        }
-
-        80% {
-            transform: scale(0.95);
-        }
-
-        100% {
-            transform: scale(1);
-            opacity: 1;
-        }
-    }
-</style>
-
 {{-- <section id="hero" class="bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern.svg')]"> --}}
-<section id="hero" class="bg-white dark:bg-gray-900 bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern.svg')] dark:bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern-dark.svg')]">
-    <div class="py-10">
-        <div class="grid grid-cols-2 gap-4">
-            <div class="lg:visible md:visible sm:invisible max-[763px]:hidden">
-                <div
-                    class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]">
-                    <div
-                        class="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg">
-                    </div>
-                    <div
-                        class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg">
-                    </div>
-                    <div
-                        class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg">
-                    </div>
-                    <div
-                        class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg">
-                    </div>
-                    <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-800">
-                        <img src="{{ asset('img/mockup.png') }}" class="dark:hidden w-[300px] h-[572px]" alt="">
-                        {{-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/mockup-1-dark.png"
-                            class="hidden dark:block w-[272px] h-[572px]" alt=""> --}}
-                    </div>
+<section id="hero" class="bg-gray-900 dark:bg-gray-900 mt-16">
+    <div class="py-32">
+        <div class="text-center">
+            <div class="">
+                <p id='welcome' class="pop-out font-extrabold text-4xl md:text-5xl text-amber-400">
+                    Breeding Room <br> Humidity & Temperature Monitoring</p>
+                <p class="pop-out font-semibold text-lg mt-7 text-white">Dapatkan Informasi Terkini tentang Kelembapan & Temperatur
+                    <br>Peternakan dengan <a class="text-amber-400 font-bold"
+                        href="{{ route('dashboard') }}">Monitoring</a> Online</p>
+                        <br>
+                        <br>
+                <div class="mt-5">
+                    <a href="{{ route('dashboard') }}">
+                        <button type="button" class="mt-3 text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                            <span class="text-lg">Monitor Sekarang</span>
+                        </button>
+                    </a>
+                    <a href="#about">
+                        <button type="button" class="mt-3 text-amber-400 outline outline-amber-400 hover:bg-amber-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-amber-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                            <span class="text-lg">Pelajari lebih lanjut</span>
+                        </button>
+                    </a>
                 </div>
-            </div>
-            <div class="mt-12 max-[762px]:col-span-2 max-[762px]:text-center max-[762px]:px-3">
-                <p id='welcome' class="pop-out font-extrabold lg:text-5xl md:text-4xl sm:text-4xl max-[637px]:text-4xl">
-                    Pantau <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl">Tinggi Air
-                        Sungai</span><br> secara Real-Time</p>
-                <p class="pop-out font-semibold text-lg mt-2">Dapatkan Informasi Terkini tentang Tinggi Air Sungai
-                    <br>Pemancingan Bon Klopo dengan <a class="text-sky-500 after:content-['_↗'] font-bold"
-                        href="{{ route('monitoring') }}">Monitoring</a> Online</p>
-                <a href="{{ route('monitoring') }}">
-                    <button type="button" class="mt-3 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                        <span class="text-lg">Monitor Sekarang</span>
-                    </button>
-                </a>
             </div>
         </div>
     </div>
 </section>
 
-<section id="keuntungan"
-    class="bg-gradient-to-r from-cyan-500 to-blue-500 lg:px-20 lg:py-20 md:px-14 md:py-14 sm:px-14 sm:py-14 max-[639px]:px-10 max-[639px]:py-10">
+<section id="kemudahan"
+    class="bg-gradient-to-r from-amber-500 to-amber-400 px-14 py-14 md:px-20 md:py-32">
     <div class="grid grid-cols-3 gap-10">
         <div class="col-span-3 justify-self-center text-center">
             <h1
-                class="mb-4 lg:text-6xl md:text-5xl sm:text-4xl max-[639px]:text-3xl font-extrabold text-white dark:text-white md:text-4xl lg:text-5xl">
+                class="mb-4 lg:text-6xl md:text-5xl sm:text-4xl max-[639px]:text-3xl font-extrabold text-gray-900 dark:text-white md:text-4xl lg:text-5xl">
                 Kemudahan yang Ditawarkan
             </h1>
-            <p class="text-xl font-semibold text-white">Beberapa kemudahan yang ditawarkan oleh Web Monitoring ialah :</p>
+            <p class="text-xl font-semibold text-gray-900">Beberapa kemudahan yang ditawarkan oleh Web Monitoring ialah :</p>
         </div>
         <div class="lg:col-span-1 md:col-span-1 sm:col-span-3 max-[639px]:col-span-3">
             <a href="#"
                 class="transition ease-in-out duration-300 block max-w-sm p-6 bg-white border hover:scale-110 border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="mb-1">
-                    <svg class="w-12 bg-sky-500 justify-self-center p-2 rounded-full stroke-white"
+                    <svg class="w-12 bg-amber-400 justify-self-center p-2 rounded-full stroke-white"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -111,7 +63,7 @@
             <a href="#"
                 class="transition ease-in-out duration-300 block max-w-sm p-6 bg-white border hover:scale-110 border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="mb-1">
-                    <svg class="w-12 bg-sky-500 justify-self-center p-2 rounded-full stroke-white"
+                    <svg class="w-12 bg-amber-400 justify-self-center p-2 rounded-full stroke-white"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -130,7 +82,7 @@
             <a href="#"
                 class="transition ease-in-out duration-300 block max-w-sm p-6 bg-white border hover:scale-110 border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="mb-1">
-                    <svg class="w-12 bg-sky-500 justify-self-center p-2 rounded-full stroke-white"
+                    <svg class="w-12 bg-amber-400 justify-self-center p-2 rounded-full stroke-white"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -148,6 +100,32 @@
     </div>
 </section>
 
+<section id="about" class="bg-gray-900 dark:bg-gray-900 px-20">
+    <div class="py-32">
+        <div class="grid grid-cols-2 gap-4">
+            <div class="text-amber-400 col-span-2 md:col-span-1">
+                <figure class="max-w-lg transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500">
+                    <img class="h-auto max-w-full rounded-lg" src="{{ asset('img/ternak-burung-kenari.webp') }}"
+                        alt="image description">
+                    <figcaption class="mt-2 text-sm text-center text-gray-100 dark:text-gray-400">Photo by : <a
+                            href="https://gdm.id/cara-ternak-kenari/">https://gdm.id/cara-ternak-kenari/</a></figcaption>
+                </figure>
+            </div>
+            <div class="text-center col-span-2 md:col-span-1">
+                <h3 class="text-amber-400 text-4xl md:text-6xl font-bold mb-3 md:mb-10">
+                    Tentang Kami
+                </h3>
+                <p class="text-lg md:text-2xl text-white">
+                    Kami adalah <span class="underline decoration-amber-400">peternakan burung kenari</span> yang berkomitmen
+                    untuk menghasilkan burung kenari berkualitas tinggi,
+                    dengan fokus pada perawatan yang baik dan pemuliaan
+                    selektif guna menciptakan keturunan yang sehat dan memiliki
+                    sifat unggul.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 <script>
     window.addEventListener("load", function() {
         var myDiv = document.getElementById("welcome");

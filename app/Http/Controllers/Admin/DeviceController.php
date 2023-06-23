@@ -39,9 +39,8 @@ class DeviceController extends Controller
 
         $sensors = $data_sensor->paginate(10)->withQueryString();
         $data_rekap = [
-            'data_tertinggi' => $data_sensor_clone->min('data'),
-            'data_terendah' => $data_sensor_clone->max('data'),
-            'data_rata_rata' => $data_sensor_clone->avg('data'),
+            'data_temperature' => $data_sensor_clone->max('temperature'),
+            'data_humidity' => $data_sensor_clone->max('humidity'),
         ];
 
         return view('dashboard.device.sensor', [

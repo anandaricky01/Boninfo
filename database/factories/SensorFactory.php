@@ -17,8 +17,9 @@ class SensorFactory extends Factory
     public function definition()
     {
         return [
-            'device_id' => $this->faker->numberBetween(1,3),
-            'data' => $this->faker->numberBetween(1,50),
+            'device_id' => 1,
+            'temperature' => $this->faker->numberBetween(1,50),
+            'humidity' => $this->faker->numberBetween(1,50),
             'created_at' => $this->faker->dateTimeBetween('-2 month', 'now')
         ];
     }

@@ -1,42 +1,29 @@
 @extends('dashboard.layout.layout')
 @section('container')
 
-<section class="mb-5 grid grid-cols-3 gap-4">
-    <div class="col-span-3 md:col-span-1">
+<section class="mb-5 grid grid-cols-2 gap-4">
+    <div class="col-span-2 md:col-span-1">
         <div class="grid grid-cols-3 bg-slate-50 p-3 dark:bg-slate-700 rounded-lg border border-gray-200 shadow-md">
             <div class="bg-red-500 rounded-full p-3 justify-self-center self-center">
-                <i data-feather="trending-up" class="stroke-white"></i>
+                <i data-feather="thermometer" class="stroke-white"></i>
             </div>
             <div class="col-span-2">
                 <div class="grid grid-rows-2 p-2">
-                    <p class="text-base font-medium dark:text-white">Data Tertinggi</p>
-                    <p id="data-tertinggi" class="text-xl font-bold dark:text-white"></p>
+                    <p class="text-base font-medium dark:text-white">Data Temperature</p>
+                    <p id="data-temperature" class="text-xl font-bold dark:text-white"></p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-span-3 md:col-span-1">
+    <div class="col-span-2 md:col-span-1">
         <div class="grid grid-cols-3 bg-slate-50 p-3 dark:bg-slate-700 rounded-lg border border-gray-200 shadow-md">
             <div class="bg-emerald-500 rounded-full p-3 justify-self-center self-center">
-                <i data-feather="trending-down" class="stroke-white"></i>
+                <i data-feather="droplet" class="stroke-white"></i>
             </div>
             <div class="col-span-2">
                 <div class="grid grid-rows-2 p-2">
-                    <p class="text-base font-medium dark:text-white">Data Terendah</p>
-                    <p id="data-terendah" class="text-xl font-bold dark:text-white"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-span-3 md:col-span-1">
-        <div class="grid grid-cols-3 bg-slate-50 p-3 dark:bg-slate-700 rounded-lg border border-gray-200 shadow-md">
-            <div class="bg-yellow-300 rounded-full p-3 justify-self-center self-center">
-                <i data-feather="bar-chart-2" class="stroke-white"></i>
-            </div>
-            <div class="col-span-2">
-                <div class="grid grid-rows-2 p-2">
-                    <p class="text-base font-medium dark:text-white">Tinggi rata - rata</p>
-                    <p id="tinggi-rata-rata" class="text-xl font-bold dark:text-white"></p>
+                    <p class="text-base font-medium dark:text-white">Data Kelembapan</p>
+                    <p id="data-humidity" class="text-xl font-bold dark:text-white"></p>
                 </div>
             </div>
         </div>
@@ -58,7 +45,10 @@
                         Tanggal
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Tinggi Air
+                        Temperature
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Kelembapan
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Device
@@ -74,67 +64,79 @@
     </div>
 </section>
 
-<section id="data-record">
-    <div class="bg-slate-50 dark:bg-slate-700 rounded-lg border border-gray-200 shadow-md">
-        <div id="tester" class=""></div>
-    </div>
-</section>
 <script>
     function updateDataInView(data) {
         var status = data.success;
-        var data_tinggi_air = data.data;
-        var data_rekap = data.data_rekap;
-        // console.log(data);
-
         var tableBody = document.getElementById('data-body');
-        var data_tertinggi = document.getElementById('data-tertinggi');
-        var data_terendah = document.getElementById('data-terendah');
-        var tinggi_rata_rata = document.getElementById('tinggi-rata-rata');
+        var data_temperature = document.getElementById('data-temperature');
+        var data_humidity = document.getElementById('data-humidity');
 
         // Kosongkan isi tabel sebelum menambahkan data baru
         tableBody.innerHTML = '';
 
-        // Iterasi melalui setiap objek data
-        data_tinggi_air.forEach(function(data) {
+        if (status == true && data.data != null) {
+            var data_sensor = data.data;
+            var data_rekap = data.data_rekap;
+            // console.log(data);
+
+            // Iterasi melalui setiap objek data
+            data_sensor.forEach(function(data) {
+                var row = document.createElement('tr');
+                row.setAttribute('class', 'bg-slate-50 border-b dark:bg-gray-800 dark:border-gray-700');
+
+                var tanggalCell = document.createElement('td');
+                tanggalCell.setAttribute('id', 'tanggal');
+                tanggalCell.setAttribute('class', 'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white');
+                tanggalCell.textContent = data.tanggal;
+                row.appendChild(tanggalCell);
+
+                var temperatureCell = document.createElement('td');
+                temperatureCell.setAttribute('id', 'temperature');
+                temperatureCell.setAttribute('class', 'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white');
+                temperatureCell.textContent = data.temperature + '\u00B0 C';
+                row.appendChild(temperatureCell);
+
+                var humidityCell = document.createElement('td');
+                humidityCell.setAttribute('id', 'humidity');
+                humidityCell.setAttribute('class', 'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white');
+                humidityCell.textContent = data.humidity + '%';
+                row.appendChild(humidityCell);
+
+                var deviceCell = document.createElement('td');
+                deviceCell.setAttribute('id', 'device');
+                deviceCell.setAttribute('class', 'px-6 py-4');
+                deviceCell.textContent = data.device;
+                row.appendChild(deviceCell);
+
+                var statusCell = document.createElement('td');
+                statusCell.setAttribute('class', 'px-6 py-4');
+
+                var statusElement = document.createElement('p');
+                statusElement.textContent = data.status;
+                statusElement.setAttribute('id', 'status');
+                statusElement.setAttribute('class', `bg-${data.statusColor} rounded p-1 text-white text-center`);
+                statusCell.appendChild(statusElement);
+
+                row.appendChild(statusCell);
+                tableBody.appendChild(row);
+            });
+
+            data_temperature.textContent = data_rekap.temperature + '\u00B0 C';
+            data_humidity.textContent = data_rekap.humidity + '%';
+        } else {
             var row = document.createElement('tr');
             row.setAttribute('class', 'bg-slate-50 border-b dark:bg-gray-800 dark:border-gray-700');
+            var errorCell = document.createElement('td');
+            errorCell.setAttribute('id', 'error');
+            errorCell.setAttribute('collspan', '4');
+            errorCell.setAttribute('class', 'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white');
+            errorCell.textContent = "Terdapat masalah pada server/Data masih kosong!";
+            row.appendChild(errorCell);
 
-            var tanggalCell = document.createElement('td');
-            tanggalCell.setAttribute('id', 'tanggal');
-            tanggalCell.setAttribute('class', 'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white');
-            tanggalCell.textContent = data.tanggal;
-            row.appendChild(tanggalCell);
-
-            var tinggiAirCell = document.createElement('td');
-            tinggiAirCell.setAttribute('id', 'tinggi_air');
-            tinggiAirCell.setAttribute('class', 'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white');
-            tinggiAirCell.textContent = data.tinggi;
-            row.appendChild(tinggiAirCell);
-
-            var deviceCell = document.createElement('td');
-            deviceCell.setAttribute('id', 'device');
-            deviceCell.setAttribute('class', 'px-6 py-4');
-            deviceCell.textContent = data.device;
-            row.appendChild(deviceCell);
-
-            var statusCell = document.createElement('td');
-            statusCell.setAttribute('class', 'px-6 py-4');
-
-            var statusElement = document.createElement('p');
-            statusElement.textContent = data.status;
-            statusElement.setAttribute('id', 'status');
-            statusElement.setAttribute('class', 'bg-sky-500 rounded p-1 text-white text-center');
-            statusCell.appendChild(statusElement);
-
-            row.appendChild(statusCell);
-
+            data_temperature.textContent = 'Null';
+            data_humidity.textContent = 'Null';
             tableBody.appendChild(row);
-        });
-
-        data_tertinggi.textContent = (29 - data_rekap.data_tertinggi) > 0 ? 'Naik ' + (29 - data_rekap.data_tertinggi) + ' cm' : 'Turun ' + -1*(29 - data_rekap.data_tertinggi) + ' cm';
-        data_terendah.textContent = (29 - data_rekap.data_terendah) > 0 ? 'Naik ' + (29 - data_rekap.data_terendah) + ' cm' : 'Turun ' + -1*(29 - data_rekap.data_terendah) + ' cm';
-        tinggi_rata_rata.textContent = (29 - data_rekap.data_rata_rata).toFixed(3) > 0 ? 'Naik ' + (29 - data_rekap.data_rata_rata).toFixed(3) + ' cm' : 'Turun ' + -1*(29 - data_rekap.data_rata_rata).toFixed(3) + ' cm';
-        // tinggi_rata_rata.textContent = (29 - data_rekap.data_rata_rata).toFixed(3) + ' cm';
+        }
     }
 
     function getDataFromAPI() {
@@ -149,7 +151,10 @@
             });
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
+        getDataFromAPI(); // Memanggil fungsi getDataFromAPIChart saat dokumen sudah siap
+    });
+
     setInterval(getDataFromAPI, 2000);
 </script>
-@include('dashboard.utils.chart')
 @endsection

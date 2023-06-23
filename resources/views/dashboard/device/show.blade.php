@@ -32,6 +32,14 @@
             </tr>
             <tr class="border-b border-gray-200 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    ID
+                </th>
+                <td class="px-6 py-4">
+                    {{ $device[0]->id }}
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
                     Deskripsi Device
                 </th>
                 <td class="px-6 py-4">
