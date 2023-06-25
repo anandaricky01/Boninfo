@@ -36,9 +36,6 @@
                     Email
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Role
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Aksi
                 </th>
             </tr>
@@ -52,9 +49,6 @@
                         </th>
                         <td class="px-6 py-4">
                             {{ $item->email }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $item->role }}
                         </td>
                         <td class="px-6 py-4">
                             <a href="{{ route('dashboard.user.show', $item->id) }}">

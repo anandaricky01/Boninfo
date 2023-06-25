@@ -1,11 +1,13 @@
 @extends('layout.layout')
 @section('container')
 
-{{-- <section id="hero" class="bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern.svg')]"> --}}
 <section id="hero" class="bg-gray-900 dark:bg-gray-900 mt-16">
     <div class="py-32">
-        <div class="text-center">
-            <div class="">
+        <div class="grid grid-cols-2 gap-10 md:gap-4">
+            <div class="col-span-2 md:col-span-1 flex justify-center">
+                <img id="logo-vokasi" src="{{ asset('img/logo-pandan-l35.png') }}" class="h-72" alt="Logo Vokasi" />
+            </div>
+            <div class="col-span-2 md:col-span-1 text-center md:text-start">
                 <p id='welcome' class="pop-out font-extrabold text-4xl md:text-5xl text-amber-400">
                     Breeding Room <br> Humidity & Temperature Monitoring</p>
                 <p class="pop-out font-semibold text-lg mt-7 text-white">Dapatkan Informasi Terkini tentang Kelembapan & Temperatur
@@ -13,7 +15,7 @@
                         href="{{ route('dashboard') }}">Monitoring</a> Online</p>
                         <br>
                         <br>
-                <div class="mt-5">
+                <div class="mt-2 md:mt-5">
                     <a href="{{ route('dashboard') }}">
                         <button type="button" class="mt-3 text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                             <span class="text-lg">Monitor Sekarang</span>

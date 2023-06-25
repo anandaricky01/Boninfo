@@ -30,7 +30,7 @@ Auth::routes([
   'reset' => false, // Password Reset Routes...
   'verify' => false, // Email Verification Routes...
 ]);
-// Route::group(['middleware' => ['auth', 'verified']], function(){
+
 Route::group(['middleware' => ['auth']], function(){
     Route::group(['prefix' => 'dashboard'], function(){
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -64,13 +64,5 @@ Route::group(['middleware' => ['auth']], function(){
         ->name('update', 'dashboard.user.update')
         ->name('destroy', 'dashboard.user.delete');
 
-        Route::resource('contact', ContactController::class)
-        ->name('index', 'dashboard.contact.index')
-        ->name('create', 'dashboard.contact.create')
-        ->name('store', 'dashboard.contact.store')
-        ->name('edit', 'dashboard.contact.edit')
-        ->name('update', 'dashboard.contact.update')
-        ->name('destroy', 'dashboard.contact.delete')
-        ->except('show');
     });
 });

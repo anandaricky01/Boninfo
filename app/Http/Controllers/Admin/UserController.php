@@ -16,11 +16,6 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        $this->middleware('superadmin')->except(['my_profile', 'edit_my_profile', 'update_my_profile']);
-    }
-
     public function index(Request $request)
     {
         $user = User::latest()->filter($request->only('search'))->paginate(5)->withQueryString();
@@ -50,8 +45,7 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'max:255'],
             'email' => ['required', 'unique:users,email', 'email'],
-            'password' => ['required', 'min:8'],
-            'role' => ['required']
+            'password' => ['required', 'min:8']
         ]);
 
         $check_user = User::where('email', $request->email)->get()->count();
@@ -106,13 +100,11 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email'],
-            'role' => ['required'],
             'password' => ['nullable','min:8', 'max:255']
         ]);
 
         $data = [
             'name' => $request->name,
-            'role' => $request->role,
         ];
 
         if($request->email != $user->email){
